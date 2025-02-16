@@ -4,6 +4,7 @@ import { contentType } from "https://deno.land/std@0.223.0/media_types/mod.ts";
 
 const dataDir = "./data";
 const distDir = "./dist";
+const port = Deno.env.get("PORT") || "8000";
 
 async function handleRequest(request: Request): Promise<Response> {
   const url = new URL(request.url);
@@ -46,10 +47,11 @@ async function handleRequest(request: Request): Promise<Response> {
       fsRoot: distDir,
       urlRoot: "/",
     });
-  } catch (_e) {
+  } catch (e) {
+    console.error(e);
     return new Response("404 - Sayfa Bulunamadı", { status: 404 });
   }
 }
 
-console.log("Sunucu 8000 portunda çalışıyor");
-serve(handleRequest, { port: 8000 });
+console.log(`Sunucu ${port} portunda çalışıyor`);
+serve(handleRequest, { port: parseInt(port) });
