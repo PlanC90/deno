@@ -1,10 +1,8 @@
 import toast from 'react-hot-toast';
 
-const dataDir = "/data"; // Veri dizini
-
 export async function readJsonFile<T>(filename: string): Promise<T | null> {
   try {
-    const response = await fetch(`${dataDir}/${filename}`);
+    const response = await fetch(`/data/${filename}`);
     if (!response.ok) {
       throw new Error(`Failed to read ${filename}`);
     }
@@ -18,7 +16,8 @@ export async function readJsonFile<T>(filename: string): Promise<T | null> {
 
 export async function writeJsonFile<T>(filename: string, data: T): Promise<boolean> {
   try {
-    const response = await fetch(`${dataDir}/${filename}`, {
+    // In development, write directly to the data folder
+    const response = await fetch(`/data/${filename}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
