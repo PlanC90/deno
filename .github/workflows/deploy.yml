@@ -7,15 +7,15 @@ on:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy to Deno
     runs-on: ubuntu-latest
 
     permissions:
-      id-token: write # Needed for auth with Deno Deploy
-      contents: read # Needed to clone the repository
+      id-token: write # Deno Deploy yetkilendirmesi için gerekli
+      contents: read # Repo'yu klonlamak için gerekli
 
     steps:
-      - name: Clone repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install Deno
@@ -28,17 +28,15 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: Install step
-        run: "npm install"
+      - name: Install dependencies
+        run: npm install
 
-      - name: Build step
-        run: "npm run build"
+      - name: Build project
+        run: npm run build
 
-      - name: Upload to Deno Deploy
+      - name: Deploy to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "memex"
-          entrypoint: "deno run --allow-read --allow-write --allow-net --allow-env server.ts"
-          root: ""
-          include: /data/*.json
-          
+          entrypoint: "server.ts"
+          include: "data/"
