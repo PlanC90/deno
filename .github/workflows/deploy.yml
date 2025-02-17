@@ -38,7 +38,7 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "planc90-deno-90"
-          entrypoint: "https://deno.land/std@0.217.0/http/fserver.ts"
+          entrypoint: "https://deno.land/std@0.217.0/http/server.ts"
           root: "dist"
-          include: data/*.json
+          
           
