@@ -38,7 +38,7 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "memex"
-          entrypoint: "npm install && npm run dev"
+          entrypoint: "npm start"
           root: "dist"
-          include: data
+          
           
