@@ -38,7 +38,7 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "memex"
-          entrypoint: "npm start"
-          root: "dist"
-          
+          entrypoint: "deno run --allow-read --allow-write --allow-net --allow-env server.ts"
+          root: ""
+          include: /data/*.json
           
