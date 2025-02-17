@@ -17,7 +17,12 @@ async function handleRequest(request: Request): Promise<Response> {
         }
         const data = await response.json();
         return new Response(JSON.stringify(data), {
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+          },
         });
       } catch (e) {
         console.error("Error fetching data:", e);
@@ -27,10 +32,10 @@ async function handleRequest(request: Request): Promise<Response> {
 
     if (request.method === "PUT") {
       try {
-        const body = await request.text(); // Get raw text body
+        const body = await request.text();
         const headers = {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*", // Required for CORS
+          "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
           "Access-Control-Allow-Headers": "Content-Type",
         };
