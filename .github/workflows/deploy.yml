@@ -37,8 +37,8 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "planc90-deno-10"
-          entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
+          project: "planc90-deno-17"
+          entrypoint: "deno run --allow-read=data --allow-write=data --allow-net --allow-env server.ts"
           root: "dist"
-          
+          include: data/*.json
           
